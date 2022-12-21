@@ -1,12 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sorteio Lotofácil</title>
-</head>
-<body>
-  
-</body>
-</html>
+<script type="module">
+  Vue.createApp({
+  data() {
+    return {
+      numerosSorteados: [],
+    }
+  },
+  methods: {
+      click(){
+        this.numerosSorteados = []
+        for(let i = 0; i<15; i++){
+          let numero = 0
+          do {
+            numero = Math.ceil(Math.random()*25)
+          } while(this.numerosSorteados.includes(numero) == true)
+          this.numerosSorteados.push(numero)
+      }
+      console.log(this.numerosSorteados)
+      },
+      corFundo(number){
+      return this.numerosSorteados.includes(number) ? 'bg-light' : 'bg-secondary'
+    }
+  }
+}).mount('#app')
+</script>
