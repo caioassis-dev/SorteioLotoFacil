@@ -4,9 +4,69 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  crossorigin="anonymous"
+/>
   <title>Sorteio Lotofácil</title>
 </head>
-<body>
-  
+<body style="background-color: #9c339b">
+  <div id="app">
+    <div class="container">
+      <div class="mt-4 d-flex justify-content-center col-12 mr-sm-4">
+        <img  src="./assets/lotofacil.png" width="450" height="100" class="d-inline-block align-top mb-3" alt=""/>
+      </div>
+      <div class="col">
+        <div class="d-flex flex-row flex-wrap justify-content-center mt-1">
+          <div
+            style="width: 65px; height: 50px"
+            v-for="number in 25"
+            class="text-white mb-3 col-1 m-2 d-flex justify-content-center align-content-center"
+            :class="corFundo(number)"
+          >
+            <p
+              class="d-flex align-items-center p-4"
+              v-if="numerosSorteados.includes(number)"
+            >
+              {{number}}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center mt-1">
+        <button class="btn btn-dark btn-block col-3 mb-3" @click="click">
+          Sortear
+        </button>
+      </div>
+    </div>
+  </div>
 </body>
+<script src="./vue.js"></script>
+<script type="module">
+  Vue.createApp({
+  data() {
+    return {
+      numerosSorteados: [],
+    }
+  },
+  methods: {
+      click(){
+        this.numerosSorteados = []
+        for(let i = 0; i<15; i++){
+          let numero = 0
+          do {
+            numero = Math.ceil(Math.random()*25)
+          } while(this.numerosSorteados.includes(numero) == true)
+          this.numerosSorteados.push(numero)
+      }
+      console.log(this.numerosSorteados)
+      },
+      corFundo(number){
+      return this.numerosSorteados.includes(number) ? 'bg-dark' : 'bg-light'
+    }
+  }
+}).mount('#app')
+</script>
 </html>
