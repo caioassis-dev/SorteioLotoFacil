@@ -16,10 +16,10 @@
   <div id="app">
     <div class="container">
       <div class="mt-4 d-flex justify-content-center col-12 mr-sm-4">
-        <img  src="./assets/lotofacil.png" width="450" height="100" class="d-inline-block align-top" alt=""/>
+        <img  src="./assets/lotofacil.png" width="450" height="100" class="d-inline-block align-top mb-3" alt=""/>
       </div>
       <div class="row d-flex justify-content-center mt-1">
-        <button class="btn btn-dark btn-block col-3" @click="click">
+        <button class="btn btn-dark btn-block col-3 mb-3" @click="click">
           Sortear
         </button>
       </div>
@@ -45,4 +45,28 @@
 </body>
 <script src="./vue.js"></script>
 <script type="module">
+  Vue.createApp({
+  data() {
+    return {
+      numerosSorteados: [],
+    }
+  },
+  methods: {
+      click(){
+        this.numerosSorteados = []
+        for(let i = 0; i<15; i++){
+          let numero = 0
+          do {
+            numero = Math.ceil(Math.random()*25)
+          } while(this.numerosSorteados.includes(numero) == true)
+          this.numerosSorteados.push(numero)
+      }
+      console.log(this.numerosSorteados)
+      },
+      corFundo(number){
+      return this.numerosSorteados.includes(number) ? 'bg-dark' : 'bg-light'
+    }
+  }
+}).mount('#app')
+</script>
 </html>
